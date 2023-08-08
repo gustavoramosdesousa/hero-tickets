@@ -1,9 +1,13 @@
 import express from 'express';
 import { Application } from 'express-serve-static-core';
 import { connectMongoDB } from './infra/mongoDB';
+import { errorMiddleware } from './middlewares/error.middlewares';
+import { EventRoutes } from './routes/event.routes';
 
 class App{
     public app : Application;
+    private eventRoutes = new EventRoutes();
+
     constructor(){
         this.app = express();
         this.middlewaresInitialize();
@@ -15,11 +19,12 @@ class App{
 
 
     interceptionError(){
-        //this.app.use();
+        this.app.use(errorMiddleware);
     };
         
     initializeRoutes(){
-        //this.app.use('/',)
+        this.app.use('/events', this.eventRoutes.router);
+        //this.app.use('/users', this.userRoutes.router);
     };
 
     middlewaresInitialize(){

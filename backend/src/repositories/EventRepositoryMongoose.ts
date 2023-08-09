@@ -28,14 +28,13 @@ const eventSchema = new mongoose.Schema({
 });
 
 const EventModel = mongoose.model('Event', eventSchema);
+
 class EventRepositoryMongoose implements EventRepository{
     async add(event : Event): Promise<Event>{
-        const eventModel = new EventModel();
+        const eventModel = new EventModel(event);
 
-        const result = await eventModel.save();
+        await eventModel.save();
         return event;
     };
-
-
 }
 export {EventRepositoryMongoose};

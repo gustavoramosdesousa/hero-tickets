@@ -18,16 +18,16 @@ class App{
     };
 
 
-    interceptionError(){
+    private interceptionError(){
         this.app.use(errorMiddleware);
     };
         
-    initializeRoutes(){
+    private initializeRoutes(){
         this.app.use('/events', this.eventRoutes.router);
         //this.app.use('/users', this.userRoutes.router);
     };
 
-    middlewaresInitialize(){
+    private middlewaresInitialize(){
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended:true})); //converte as urls, para remover espaço e colocar "%20" por exemplo
     };

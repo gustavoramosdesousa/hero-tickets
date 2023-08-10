@@ -41,10 +41,38 @@ class EventController{
             next(error);
         }
     }
-    async findEventByCategory(request: Request, response: Response, next: NextFunction){
+    async findEventById(request: Request, response: Response, next: NextFunction){
+        const {id} = request.params; //"uri/latitude=xpto&longitude=yto" 
+        try {
+            const events = await this.eventUseCase.findEventById(String(id));
+            return response.status(200).json(events);
+        } catch (error) {
+            next(error);
+        }
+    }
+    async addParticipant(request: Request, response: Response, next: NextFunction){
+        const {id} = request.params; //"uri/latitude=xpto&longitude=yto" 
+        const {name, email} = request.body;
+        try {
+            const events = await this.eventUseCase.addParticipant(String(id),String(name),String(email));
+            return response.status(200).json(events);
+        } catch (error) {
+            next(error);
+        }
+    }
+    async findEventsByName(request: Request, response: Response, next: NextFunction){
+        const {name} = request.query; //"uri/latitude=xpto&longitude=yto" 
+        try {
+            const events = await this.eventUseCase.findEventsByName(String(name));
+            return response.status(200).json(events);
+        } catch (error) {
+            next(error);
+        }
+    }
+    async findEventsByCategory(request: Request, response: Response, next: NextFunction){
         const {category} = request.params; //"uri/latitude=xpto&longitude=yto" 
         try {
-            const events = await this.eventUseCase.findEventByCategory(String(category));
+            const events = await this.eventUseCase.findEventsByCategory(String(category));
             return response.status(200).json(events);
         } catch (error) {
             next(error);

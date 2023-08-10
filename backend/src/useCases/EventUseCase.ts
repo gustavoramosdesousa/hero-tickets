@@ -4,6 +4,9 @@ import { HttpException } from "../interfaces/HttpException";
 import { EventRepository} from "../repositories/EventRepository";
 
 class EventUseCase{
+    addParticipant(id: string, name: string, email: string) {
+        throw new Error("Method not implemented.");
+    }
     //nível da arquitetura que já começa a ter dependências
     constructor(private eventRepository:EventRepository){};
     private async getCityNameByCoordinates(latitude:string, longitude:string){
@@ -26,7 +29,11 @@ class EventUseCase{
         throw new Error("Method not implemented.");
     }
     
-
+    async findEventById(id: string) {
+        if(!id) {throw new HttpException(400, 'ID is required.')}
+        const findEventById = await this.eventRepository.findEventById(id);
+        return findEventById;
+     }
     async findEventByLocation(latitude: string, longitude: string) {
        const cityName = await this.getCityNameByCoordinates(latitude,longitude); //localização do usuário
        const findEventByCity = await this.eventRepository.findEventsByCity(cityName); //todos os eventos da cidade do usuário
@@ -37,13 +44,18 @@ class EventUseCase{
 
        return eventWithRadius;
     }
-    async findEventByCategory(category: string) {
-        if(!category) throw new HttpException(400, 'Category is required.')
-        const events = await this.eventRepository.findEventsByCategory(category); //localização do usuário
+    async findEventsByCategory(category: string) {
+        if(!category) throw new HttpException(400, 'Category is required.');
+        const events = await this.eventRepository.findEventsByCategory(category);
     
         return events;
      }
-
+     async findEventsByName(name: string) {
+        if(!name) throw new HttpException(400, 'Name is required.')
+        const events = await this.eventRepository.findEventsByName(name);
+    
+        return events;
+     }
     async create(eventData: Event){
         if(!eventData.banner){
             throw new HttpException(400, "Banner is required");

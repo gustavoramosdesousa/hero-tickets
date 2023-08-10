@@ -1,1 +1,7 @@
 /backend/node_modules
+backend/src/tmp
+backend/src/infra/*
+backend/coverage/
+src/infra/mongoDB.ts
+src/infra/*
+backend/*.log

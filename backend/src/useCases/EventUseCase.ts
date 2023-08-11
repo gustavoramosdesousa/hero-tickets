@@ -5,7 +5,15 @@ import { EventRepository} from "../repositories/EventRepository";
 
 class EventUseCase{
     addParticipant(id: string, name: string, email: string) {
-        throw new Error("Method not implemented.");
+        const event = this.eventRepository.findEventById(id);
+        
+        if(!event){
+            throw new HttpException(400, 'Event not found');
+        }
+        // adiciona um participante e recupera seu ID
+
+        // atualiza evento com o ID do participante
+
     }
     //nível da arquitetura que já começa a ter dependências
     constructor(private eventRepository:EventRepository){};

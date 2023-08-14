@@ -4,6 +4,7 @@ import { Event } from "../entities/Event";
 
 class EventController{
    
+   
 
     //depende dos usecases
     constructor(private eventUseCase: EventUseCase){};
@@ -41,6 +42,16 @@ class EventController{
             next(error);
         }
     }
+    async filterEvents(request: Request, response: Response, next: NextFunction){
+        const {latitude, longitude, name, date, category, radius, price} = request.query; //"uri/latitude=xpto&longitude=yto" 
+        try {
+            const events = await this.eventUseCase.findEventsByQuery(String(category), String(name), String(price), new Date());
+            //category: string, name: string, radius:string, price: string, date: Date
+            return response.status(200).json(events);
+        } catch (error) {
+            next(error);
+        }
+    }
     async findEventById(request: Request, response: Response, next: NextFunction){
         const {id} = request.params; //"uri/latitude=xpto&longitude=yto" 
         try {
@@ -73,6 +84,15 @@ class EventController{
         const {category} = request.params; //"uri/latitude=xpto&longitude=yto" 
         try {
             const events = await this.eventUseCase.findEventsByCategory(String(category));
+            return response.status(200).json(events);
+        } catch (error) {
+            next(error);
+        }
+    }
+    async findMainEvents(request: Request, response: Response, next: NextFunction){
+ 
+        try {
+            const events = await this.eventUseCase.findEventsMain();
             return response.status(200).json(events);
         } catch (error) {
             next(error);

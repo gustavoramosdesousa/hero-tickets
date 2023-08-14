@@ -4,6 +4,11 @@ import { HttpException } from "../interfaces/HttpException";
 import { EventRepository} from "../repositories/EventRepository";
 
 class EventUseCase{
+    async findEventsMain() {
+        const events = await this.eventRepository.findEventsMain(new Date());
+    
+        return events;
+    }
     addParticipant(id: string, name: string, email: string) {
         const event = this.eventRepository.findEventById(id);
         
@@ -31,6 +36,9 @@ class EventUseCase{
         }
         throw new HttpException(401,'City not found.');
             */
+
+        //const formattedAddress = response.data.results[0].formatted_adress;
+
         return "Campina Grande";
     }
     calculateDistanceBetweenPoints(latitude: string, longitude: string): number {
@@ -55,6 +63,12 @@ class EventUseCase{
     async findEventsByCategory(category: string) {
         if(!category) throw new HttpException(400, 'Category is required.');
         const events = await this.eventRepository.findEventsByCategory(category);
+    
+        return events;
+     }
+     async findEventsByQuery(category: string, name: string, price: string, date: Date) {
+        if(!category) throw new HttpException(400, 'Category is required.');
+        const events = await this.eventRepository.findEventsByQuery(category, name, price, date);
     
         return events;
      }

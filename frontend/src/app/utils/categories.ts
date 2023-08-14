@@ -1,18 +1,34 @@
 const categories = [
 {
     name: 'Acadêmico',
-    icon:'/google.png',
+    icon:'/academico.png',
     route: 'academic'
 },
 {
-    name: 'Show',
-    icon:'/google.png',
-    route: 'show'
+    name: 'Animais',
+    icon:'/animais.png',
+    route: 'animals'
 },
 {
-    name: 'Negócios',
-    icon:'/google.png',
-    route: 'business'
+    name: 'Cultural',
+    icon:'/cultural.png',
+    route: 'cultural'
+},{
+    name: 'Feiras',
+    icon:'/feiras.png',
+    route: 'feiras'
+},{
+    name: 'Gastronômicos',
+    icon:'/gastronomicos.png',
+    route: 'gastronomicos'
+},{
+    name: 'Musical',
+    icon:'/musical.png',
+    route: 'musical'
+},{
+    name: 'Festivais',
+    icon:'/festival.png',
+    route: 'festival'
 },
 ]
 

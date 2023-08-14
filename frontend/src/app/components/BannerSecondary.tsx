@@ -1,17 +1,20 @@
 import Image from 'next/image';
 
-export const BannerPrimary = () => {
+export const BannerSecundary = ({event}:any) => {
+    const image = `http://localhost:3333/uploads/${event.banner}`;
+    const date = new Date(event.date);
     return(
 <div className="rounded p-5">
-                <div className="relative w-full h-[280px] bg-black bg-opacity-25 rounded-3xl shadow">
+                <div className="relative w-full h-[280px] rounded-3xl shadow bg-cover bg-center" 
+                        style={{backgroundImage: `url(${image})`}}>
                     <div className="p-5 text-white absolute bottom-0">
-                        <h3 className="text-5xl pb-4 font-bold">Jorge e Matheus</h3>
+                        <h3 className="text-5xl pb-4 font-bold">{event.title}</h3>
                         <div className='flex'>
                             <div className='mr-4 flex'>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                                 </svg>
-                                <p>calendário</p>
+                                <p>{date.getDate()}/{date.getMonth()+1}/{date.getFullYear()}</p>
                             </div>
                             <div className='mr-4 flex'>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -23,7 +26,7 @@ export const BannerPrimary = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <p>Horário</p>
+                                <p>{date.getHours()}h</p>
                             </div>
                         </div>
                     </div>
